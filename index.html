@@ -5,9 +5,32 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./css/index.css" />
-        <title>JS starter</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>StopWatch</title>
     </head>
     <body>
+        <div class="main-container">
+            <h1 class="title">StopWatch</h1>
+            <div class="watch-container">
+                <ul id="time-list">
+                    <li id="minutes">00</li>
+                    <li class="separator">:</li>
+                    <li id="seconds">00</li>
+                    <li class="separator">:</li>
+                    <li id="milliseconds">000</li>
+                </ul>
+                <ul id="button-list">
+                    <li id="start">start</li>
+                    <li id="stop">stop</li>
+                    <li id="reset">reset</li>
+                </ul>
+            </div>
+        </div>
+
         <script src="./src/index.js"></script>
     </body>
 </html>
