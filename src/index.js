@@ -10,29 +10,46 @@ stopButton.addEventListener('click', () => getClick('stop'));
 resetButton.addEventListener('click', () => getClick('reset'));
 
 let startTime = '';
-let currentTime = '';
+let currentTime = JSON.parse(localStorage.getItem('currentTime')) || 0;
 let timeCount = '';
+
+function getStorage() {
+    localStorage.setItem('currentTime', JSON.stringify(currentTime));
+}
 
 function getClick(startStop) {
     switch (startStop) {
         case 'start':
-            startTime = Date.now();
-            return (timeCount = setInterval(updateTime, 10));
+            if (!timeCount) {
+                startTime = Date.now() - currentTime;
+                timeCount = setInterval(getTime, 10);
+            }
+            return;
         case 'stop':
-            return clearInterval(timeCount);
+            clearInterval(timeCount);
+            timeCount = '';
+            currentTime = Date.now() - startTime;
+            getStorage();
+            return;
         case 'reset':
             startTime = '';
             clearInterval(timeCount);
+            currentTime = 0;
             milliseconds.textContent = '000';
             seconds.textContent = '00';
             minutes.textContent = '00';
+            getStorage();
             return;
     }
 }
 
-function updateTime() {
+function getTime() {
     currentTime = Date.now() - startTime;
+    updateTime();
+    getStorage();
+}
 
+function updateTime() {
     const millisecondsTime = Math.floor(currentTime % 1000);
     const secondsTime = Math.floor((currentTime % 60000) / 1000);
     const minutesTime = Math.floor(currentTime / 60000);
@@ -48,3 +65,5 @@ function updateTime() {
 
     minutes.textContent = minutesTime < 10 ? `0${minutesTime}` : minutesTime;
 }
+
+updateTime();
