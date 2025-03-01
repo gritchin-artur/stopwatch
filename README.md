@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-![Example screenshot](./assets/screenshot.png)
+![Example screenshot](./planning/screenshotStopWatch.png)
 
 ## Technologies
 
